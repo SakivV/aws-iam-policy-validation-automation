@@ -1,10 +1,10 @@
-# lambda-fail-template.yaml
+# lambda-pass-template.yaml
 AWSTemplateFormatVersion: '2010-09-09'
 Resources:
-  LambdaWideOpenRole:
+  LambdaFriendlyRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: LambdaWideOpenCFRole
+      RoleName: LambdaSafeCFRole
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -13,11 +13,12 @@ Resources:
               Service: lambda.amazonaws.com
             Action: sts:AssumeRole
       Policies:
-        - PolicyName: FullCFStackAccess
+        - PolicyName: CFNonPlatformTeamAccess
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action:
-                  - cloudformation:*
-                Resource: "*"
+                  - cloudformation:CreateStack
+                  - cloudformation:UpdateStack
+                Resource: arn:aws:cloudformation:us-east-1:123456789012:stack/devteam/*
