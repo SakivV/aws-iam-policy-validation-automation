@@ -1,0 +1,47 @@
+name: cfn-policy-validator-workflow
+on:
+  pull_request:
+    types: [opened, review_requested]
+
+  push:
+    branches:
+      - 'main'
+
+permissions:
+  id-token: write
+  contents: read
+  issues: write
+
+jobs: 
+  cfn-iam-policy-validation: 
+    name: iam-policy-validation
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout code
+        id: checkOut
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        id: configureCreds
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.OIDC_IAM_ROLE }}
+          aws-region: us-east-1
+          role-session-name: GitHubSessionName
+        
+      # - name: Fetch reference policy from s3
+      #   id: getReferencePolicy
+      #   run: |
+      #     aws s3 cp ${{ secrets.REFERENCE_IDENTITY_POLICY }} ./reference-identity-policy.json
+      #   shell: bash
+          
+      - name: Run AWS AccessAnalyzer CheckNoNewAccess check
+        id: run-aws-check-no-new-access
+        uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
+        with:
+          policy-check-type: 'CHECK_NO_NEW_ACCESS'
+          template-path: './iam-role-lambda.yaml'
+          reference-policy: './cloudformation-policy-reference.json'
+          reference-policy-type: "IDENTITY"
+          region: us-east-1
