@@ -45,3 +45,13 @@ jobs:
           reference-policy: './cloudformation-policy-reference.json'
           reference-policy-type: "IDENTITY"
           region: us-east-1
+      - name: Deploy CloudFormation Stack
+        id: deployStack
+        if: success()  # Only run if previous steps succeeded
+        run: |
+          aws cloudformation deploy \
+            --template-file iam-role-lambda.yaml \
+            --stack-name lambda-access-check-demo \
+            --capabilities CAPABILITY_NAMED_IAM
+        shell: bash
+    
