@@ -36,7 +36,7 @@ jobs:
       #     aws s3 cp ${{ secrets.REFERENCE_IDENTITY_POLICY }} ./reference-identity-policy.json
       #   shell: bash
           
-      - name: Run AWS AccessAnalyzer CheckNoNewAccess check
+      - name: CloudFormation-Access-Checks
         id: run-aws-check-no-new-access
         uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
         with:
@@ -45,7 +45,7 @@ jobs:
           reference-policy: './cloudformation-policy-reference.json'
           reference-policy-type: "IDENTITY"
           region: us-east-1
-      - name: Run AWS AccessAnalyzer Check No new Access check
+      - name: New-Principal-Checks
         id: run-aws-check-no-new-access-assumerole
         uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
         with:
