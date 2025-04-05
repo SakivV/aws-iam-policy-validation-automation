@@ -45,11 +45,11 @@ jobs:
           reference-policy: './cloudformation-policy-reference.json'
           reference-policy-type: "IDENTITY"
           region: us-east-1
-      - name: Run AWS AccessAnalyzer AccessNotGranted check
-        id: run-aws-access-not-granted
+      - name: Run AWS AccessAnalyzer Check No new Access check
+        id: run-aws-check-no-new-access-assumerole
         uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
         with:
-          policy-check-type: 'CHECK_ACCESS_NOT_GRANTED'
+          policy-check-type: 'CHECK_NO_NEW_ACCESS'
           template-path: './cfn-template-iam-role-principal.yaml'
           reference-policy: './allowlist-account-principal.json'
           #reference-policy-type: "RESOURCE"
