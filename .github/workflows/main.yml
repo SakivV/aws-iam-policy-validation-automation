@@ -52,7 +52,7 @@ jobs:
           policy-check-type: 'CHECK_NO_NEW_ACCESS'
           template-path: './cfn-template-iam-role-principal.yaml'
           reference-policy: './allowlist-account-principal.json'
-          #reference-policy-type: "RESOURCE"
+          reference-policy-type: "RESOURCE"
           region: us-east-1
       # - name: Deploy CloudFormation Stack
       #   id: deployStack
