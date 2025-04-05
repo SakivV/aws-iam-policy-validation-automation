@@ -1,0 +1,16 @@
+# iam-role-trust-pass.yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  PartnerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: TrustedPartnerRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: AllowOnlySpecificAccounts
+            Effect: Allow
+            Principal:
+              AWS:
+                - arn:aws:iam::038980620352:root
+            Action: sts:AssumeRole

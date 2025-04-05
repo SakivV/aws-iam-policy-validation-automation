@@ -45,13 +45,22 @@ jobs:
           reference-policy: './cloudformation-policy-reference.json'
           reference-policy-type: "IDENTITY"
           region: us-east-1
-      - name: Deploy CloudFormation Stack
-        id: deployStack
-        if: success()  # Only run if previous steps succeeded
-        run: |
-          aws cloudformation deploy \
-            --template-file iam-role-lambda.yaml \
-            --stack-name lambda-access-check-demo \
-            --capabilities CAPABILITY_NAMED_IAM
-        shell: bash
+      - name: Run AWS AccessAnalyzer AccessNotGranted check
+        id: run-aws-access-not-granted
+        uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
+        with:
+          policy-check-type: 'CHECK_ACCESS_NOT_GRANTED'
+          template-path: './cfn-template-iam-role-principal.yaml'
+          reference-policy: './allowlist-account-principal.json'
+          #reference-policy-type: "RESOURCE"
+          region: us-east-1
+      # - name: Deploy CloudFormation Stack
+      #   id: deployStack
+      #   if: success()  # Only run if previous steps succeeded
+      #   run: |
+      #     aws cloudformation deploy \
+      #       --template-file iam-role-lambda.yaml \
+      #       --stack-name lambda-access-check-demo \
+      #       --capabilities CAPABILITY_NAMED_IAM
+      #   shell: bash
     
