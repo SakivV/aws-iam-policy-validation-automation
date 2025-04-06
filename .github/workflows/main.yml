@@ -61,7 +61,7 @@ jobs:
           policy-check-type: 'CHECK_NO_NEW_ACCESS'
           template-path: './cfn-iam-pass-role-sample.yaml'
           reference-policy: './privilege-action.json'
-          reference-policy-type: "RESOURCE"
+          reference-policy-type: "IDENTITY"
           region: us-east-1
       # - name: Deploy CloudFormation Stack
       #   id: deployStack
