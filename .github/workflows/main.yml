@@ -41,7 +41,7 @@ jobs:
         uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
         with:
           policy-check-type: 'CHECK_NO_NEW_ACCESS'
-          template-path: './iam-role-lambda.yaml'
+          template-path: './cfn-iam-role-cloudformation-sample.yaml'
           reference-policy: './cloudformation-policy-reference.json'
           reference-policy-type: "IDENTITY"
           region: us-east-1
@@ -50,8 +50,17 @@ jobs:
         uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
         with:
           policy-check-type: 'CHECK_NO_NEW_ACCESS'
-          template-path: './cfn-template-iam-role-principal.yaml'
+          template-path: './cfn-iam-role-principal-sample.yaml'
           reference-policy: './allowlist-account-principal.json'
+          reference-policy-type: "RESOURCE"
+          region: us-east-1
+      - name: Privilaged-Access-Checks
+        id: run-aws-check-no-new-access-privilaged-checks
+        uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
+        with:
+          policy-check-type: 'CHECK_NO_NEW_ACCESS'
+          template-path: './cfn-iam-pass-role-sample.yaml'
+          reference-policy: './privilege-action.json'
           reference-policy-type: "RESOURCE"
           region: us-east-1
       # - name: Deploy CloudFormation Stack
