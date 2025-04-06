@@ -19,4 +19,4 @@ Resources:
             Statement:
               - Effect: Allow
                 Action: iam:PassRole
-                Resource: arn:aws:iam::377955984759:role/PassableRoles/MyRole
+                Resource: arn:aws:iam::377955984759:role/WrongPathRoles/MyRole
