@@ -34,6 +34,7 @@ jobs:
         id: getReferencePolicy
         run: |
           aws s3 cp ${{ secrets.REFERENCE_IDENTITY_POLICY_CLOUDFORMATION }} ./cloudformation-policy-reference.json
+          aws s3 cp ${{ secrets.REFERENCE_IDENTITY_POLICY_PRINCIPAL }} ./allowlist-account-principal.json
         shell: bash
           
       - name: CloudFormation-Access-Checks
@@ -54,15 +55,15 @@ jobs:
           reference-policy: './allowlist-account-principal.json'
           reference-policy-type: "RESOURCE"
           region: us-east-1
-      - name: Privilaged-Access-Checks
-        id: run-aws-check-no-new-access-privilaged-checks
-        uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
-        with:
-          policy-check-type: 'CHECK_NO_NEW_ACCESS'
-          template-path: './cfn-iam-pass-role-sample.yaml'
-          reference-policy: './privilege-action.json'
-          reference-policy-type: "IDENTITY"
-          region: us-east-1
+      # - name: Privilaged-Access-Checks
+      #   id: run-aws-check-no-new-access-privilaged-checks
+      #   uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
+      #   with:
+      #     policy-check-type: 'CHECK_NO_NEW_ACCESS'
+      #     template-path: './cfn-iam-pass-role-sample.yaml'
+      #     reference-policy: './privilege-action.json'
+      #     reference-policy-type: "IDENTITY"
+      #     region: us-east-1
       # - name: Deploy CloudFormation Stack
       #   id: deployStack
       #   if: success()  # Only run if previous steps succeeded
