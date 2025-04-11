@@ -22,4 +22,4 @@ Resources:
                   - cloudformation:CreateStack
                   - cloudformation:UpdateStack
                   - cloudformation:DeleteStack
-                Resource: '*'
+                Resource: 'arn:aws:cloudformation:*:*:stack/platformteam/*'
