@@ -8,4 +8,4 @@ This repository demonstrates how to integrate **IAM policy validation** into you
 
 - An AWS account with **IAM Access Analyzer enabled**
 - A GitHub repo with **OIDC role integration**
-- Reference policies defined for validation
+- Reference policies defined for validation.

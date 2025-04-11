@@ -1,0 +1,24 @@
+# lambda-pass-template.yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  LambdaFriendlyRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: LambdaSafeCFRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: CFNonPlatformTeamAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - cloudformation:CreateStack
+                  - cloudformation:UpdateStack
+                Resource: arn:aws:cloudformation:us-east-1:123456789012:stack/devteam/*

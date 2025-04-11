@@ -42,7 +42,7 @@ jobs:
         uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
         with:
           policy-check-type: 'CHECK_NO_NEW_ACCESS'
-          template-path: './cfn-iam-role-cloudformation-sample.yaml'
+          template-path: './cloudformation-sample/cfn-iam-pass-role-sample.yaml'
           reference-policy: './cloudformation-policy-reference.json'
           reference-policy-type: "IDENTITY"
           region: us-east-1
@@ -51,7 +51,7 @@ jobs:
         uses: aws-actions/cloudformation-aws-iam-policy-validator@v1.0.1
         with:
           policy-check-type: 'CHECK_NO_NEW_ACCESS'
-          template-path: './cfn-iam-role-principal-sample.yaml'
+          template-path: './cloudformation-sample/cfn-iam-role-principal-sample.yaml'
           reference-policy: './allowlist-account-principal.json'
           reference-policy-type: "RESOURCE"
           region: us-east-1
