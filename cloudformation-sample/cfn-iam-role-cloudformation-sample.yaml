@@ -21,4 +21,5 @@ Resources:
                 Action:
                   - cloudformation:CreateStack
                   - cloudformation:UpdateStack
-                Resource: arn:aws:cloudformation:us-east-1:123456789012:stack/devteam/*
+                  - cloudformation:DeleteStack
+                Resource: "*"
