@@ -6,6 +6,8 @@ This repository demonstrates how to integrate **IAM policy validation** into you
 
 ## ✅ Prerequisites
 
-- An AWS account with **IAM Access Analyzer enabled**
-- A GitHub repo with **OIDC role integration**
-- Reference policies defined for validation.
+- An AWS account with:
+  - IAM Access Analyzer enabled
+  - An IAM role configured for GitHub OIDC access
+  - A reference policy stored in S3
+- GitHub repository with appropriate secrets configured
